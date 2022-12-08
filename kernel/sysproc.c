@@ -89,3 +89,22 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_getpgid(void)
+{
+  int pid;
+  argint(0, &pid);
+  // TODO: Implement
+  return -1;
+}
+
+uint64
+sys_setpgid(void)
+{
+  int pid, pgid;
+  argint(0, &pid);
+  argint(1, &pgid);
+  // TODO: Implement
+  return -1;
+}
