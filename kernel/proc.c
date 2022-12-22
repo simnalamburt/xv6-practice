@@ -686,3 +686,69 @@ procdump(void)
     printf("%d\t%d\t%s\t%s\n", p->pid, p->pgid, state, p->name);
   }
 }
+
+// Find a process with matching PID and lock it, return it.
+// If PID is 0, locks and returns calling process.
+// If there's no matching PID, return 0 and nothing is locked.
+static struct proc *
+find_by_pid_then_lock(int pid) {
+  struct proc *p;
+
+  // If PID is zero, use calling process then lock it
+  if (pid == 0) {
+    p = myproc();
+    acquire(&p->lock);
+    return p;
+  }
+
+  // Find a process with matching PID then lock it
+  for(p = proc; p < &proc[NPROC]; ++p) {
+    acquire(&p->lock);
+    if (p->pid == pid) {
+      return p;
+    } else {
+      release(&p->lock);
+    }
+  }
+
+  // Return NULL when no process has been found
+  return 0;
+}
+
+int
+getpgid(int pid)
+{
+  // Invalid pid
+  if (pid < 0) { return -1; }
+
+  struct proc *p = find_by_pid_then_lock(pid);
+  // No matching process
+  if (p == 0) { return -1; }
+
+  // assert: p is Locked
+
+  // Return PGID
+  int pgid = p->pgid;
+  release(&p->lock);
+  return pgid;
+}
+
+int
+setpgid(int pid, int pgid)
+{
+  // Invalid pid
+  if (pid < 0 || pgid < 0) { return -1; }
+
+  struct proc *p = find_by_pid_then_lock(pid);
+  // No matching process
+  if (p == 0) { return -1; }
+
+  // assert: p is Locked
+
+  if (pgid == 0) { pgid = p->pid; }
+
+  // Update PGID
+  p->pgid = pgid;
+  release(&p->lock);
+  return 0;
+}
