@@ -704,7 +704,7 @@ find_by_pid_then_lock(int pid) {
   // Find a process with matching PID then lock it
   for(p = proc; p < &proc[NPROC]; ++p) {
     acquire(&p->lock);
-    if (p->pid == pid) {
+    if (p->pid == pid && p->state != UNUSED && p->state != ZOMBIE) {
       return p;
     } else {
       release(&p->lock);
