@@ -135,7 +135,7 @@ static uint64 (*syscalls[])(void) = {
 void
 syscall(void)
 {
-  int num;
+  uint num;
   struct proc *p = myproc();
 
   num = p->trapframe->a7;

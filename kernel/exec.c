@@ -158,7 +158,7 @@ loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz
       n = sz - i;
     else
       n = PGSIZE;
-    if(readi(ip, 0, (uint64)pa, offset+i, n) != n)
+    if(readi(ip, 0, (uint64)pa, offset+i, n) != (int)n)
       return -1;
   }
   

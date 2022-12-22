@@ -40,10 +40,9 @@ printint(int fd, int xx, int base, int sgn)
 
 static void
 printptr(int fd, uint64 x) {
-  int i;
   putc(fd, '0');
   putc(fd, 'x');
-  for (i = 0; i < (sizeof(uint64) * 2); i++, x <<= 4)
+  for (uint i = 0; i < (sizeof(uint64) * 2); i++, x <<= 4)
     putc(fd, digits[x >> (sizeof(uint64) * 8 - 4)]);
 }
 

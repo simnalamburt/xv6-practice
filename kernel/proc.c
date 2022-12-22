@@ -664,12 +664,12 @@ void
 procdump(void)
 {
   static char *states[] = {
-  [UNUSED]    "unused",
-  [USED]      "used",
-  [SLEEPING]  "sleep ",
-  [RUNNABLE]  "runble",
-  [RUNNING]   "run   ",
-  [ZOMBIE]    "zombie"
+  [UNUSED]   = "unused",
+  [USED]     = "used",
+  [SLEEPING] = "sleep ",
+  [RUNNABLE] = "runble",
+  [RUNNING]  = "run   ",
+  [ZOMBIE]   = "zombie"
   };
   struct proc *p;
   char *state;

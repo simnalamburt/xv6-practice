@@ -57,7 +57,7 @@ sys_sleep(void)
   argint(0, &n);
   acquire(&tickslock);
   ticks0 = ticks;
-  while(ticks - ticks0 < n){
+  while((int)(ticks - ticks0) < n){
     if(killed(myproc())){
       release(&tickslock);
       return -1;

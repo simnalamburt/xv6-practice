@@ -15,13 +15,13 @@ void assert_eq(int left, int right) {
   exit(1);
 }
 
-int main(int, char**) {
+int main(void) {
   int pid = getpid();
   int ret, pgid;
 
   ret = getpgid(-1);
   assert_eq(ret, -1);
-  ret = getpgid(4200000000);
+  ret = getpgid(2100000000);
   assert_eq(ret, -1);
 
   pgid = getpgid(1);
@@ -29,7 +29,7 @@ int main(int, char**) {
 
   ret = setpgid(-1, 12345);
   assert_eq(ret, -1);
-  ret = setpgid(4200000000, 12345);
+  ret = setpgid(2100000000, 12345);
   assert_eq(ret, -1);
   ret = setpgid(0, -1);
   assert_eq(ret, -1);

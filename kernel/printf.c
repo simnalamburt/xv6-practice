@@ -52,7 +52,7 @@ printint(int xx, int base, int sign)
 static void
 printptr(uint64 x)
 {
-  int i;
+  uint i;
   consputc('0');
   consputc('x');
   for (i = 0; i < (sizeof(uint64) * 2); i++, x <<= 4)

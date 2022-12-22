@@ -173,10 +173,9 @@ bad:
 static int
 isdirempty(struct inode *dp)
 {
-  int off;
   struct dirent de;
 
-  for(off=2*sizeof(de); off<dp->size; off+=sizeof(de)){
+  for(uint off=2*sizeof(de); off<dp->size; off+=sizeof(de)){
     if(readi(dp, 0, (uint64)&de, off, sizeof(de)) != sizeof(de))
       panic("isdirempty: readi");
     if(de.inum != 0)
@@ -435,7 +434,7 @@ uint64
 sys_exec(void)
 {
   char path[MAXPATH], *argv[MAXARG];
-  int i;
+  uint i;
   uint64 uargv, uarg;
 
   argaddr(1, &uargv);
