@@ -61,7 +61,7 @@ go(int which_child)
     exit(1);
   }
   chdir("/");
-  
+
   while(1){
     iters++;
     if((iters % 500) == 0)
@@ -298,7 +298,7 @@ iter()
 {
   unlink("a");
   unlink("b");
-  
+
   int pid1 = fork();
   if(pid1 < 0){
     printf("grind: fork failed\n");
